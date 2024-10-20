@@ -81,36 +81,6 @@
             { nome: "João Silva", data_nascimento: "1990-01-01", contato: "joao@mail.com", tipo: "residente" },
             { nome: "Maria Souza", data_nascimento: "1985-05-23", contato: "maria@mail.com", tipo: "funcionario" },
             { nome: "Carlos Pereira", data_nascimento: "2000-12-12", contato: "carlos@mail.com", tipo: "voluntario" },
-            { nome: "Ana Oliveira", data_nascimento: "1992-04-18", contato: "ana@mail.com", tipo: "residente" },
-            { nome: "Fernando Lima", data_nascimento: "1988-11-30", contato: "fernando@mail.com", tipo: "funcionario" },
-            { nome: "Patrícia Costa", data_nascimento: "1995-07-21", contato: "patricia@mail.com", tipo: "voluntario" },
-            { nome: "Eduardo Martins", data_nascimento: "1987-03-12", contato: "eduardo@mail.com", tipo: "residente" },
-            { nome: "Juliana Ferreira", data_nascimento: "1993-09-05", contato: "juliana@mail.com", tipo: "funcionario" },
-            { nome: "Roberto Santos", data_nascimento: "1991-06-15", contato: "roberto@mail.com", tipo: "voluntario" },
-            { nome: "Camila Rodrigues", data_nascimento: "1989-08-25", contato: "camila@mail.com", tipo: "residente" },
-            { nome: "Ricardo Alves", data_nascimento: "1994-02-20", contato: "ricardo@mail.com", tipo: "funcionario" },
-            { nome: "Larissa Mendes", data_nascimento: "1996-10-10", contato: "larissa@mail.com", tipo: "voluntario" },
-            { nome: "Jorge Nascimento", data_nascimento: "1980-12-01", contato: "jorge@mail.com", tipo: "residente" },
-            { nome: "Sofia Ribeiro", data_nascimento: "1997-05-14", contato: "sofia@mail.com", tipo: "funcionario" },
-            { nome: "Victor Hugo", data_nascimento: "1992-09-29", contato: "victor@mail.com", tipo: "voluntario" },
-            { nome: "Gustavo Barros", data_nascimento: "1983-11-02", contato: "gustavo@mail.com", tipo: "residente" },
-            { nome: "Thais Lima", data_nascimento: "1988-04-28", contato: "thais@mail.com", tipo: "funcionario" },
-            { nome: "Fábio Silva", data_nascimento: "1991-07-17", contato: "fabio@mail.com", tipo: "voluntario" },
-            { nome: "Lúcia Almeida", data_nascimento: "1986-03-03", contato: "lucia@mail.com", tipo: "residente" },
-            { nome: "Samuel Oliveira", data_nascimento: "1990-02-15", contato: "samuel@mail.com", tipo: "funcionario" },
-            { nome: "Vanessa Martins", data_nascimento: "1994-08-09", contato: "vanessa@mail.com", tipo: "voluntario" },
-            { nome: "Paulo Henrique", data_nascimento: "1985-10-24", contato: "paulo@mail.com", tipo: "residente" },
-            { nome: "Mariana Ferreira", data_nascimento: "1993-12-13", contato: "mariana@mail.com", tipo: "funcionario" },
-            { nome: "Roberta Costa", data_nascimento: "1995-06-30", contato: "roberta@mail.com", tipo: "voluntario" },
-            { nome: "Felipe Santos", data_nascimento: "1989-11-20", contato: "felipe@mail.com", tipo: "residente" },
-            { nome: "Aline Lopes", data_nascimento: "1992-03-04", contato: "aline@mail.com", tipo: "funcionario" },
-            { nome: "Rafael Pereira", data_nascimento: "1991-09-17", contato: "rafael@mail.com", tipo: "voluntario" },
-            { nome: "Marcio Silva", data_nascimento: "1998-07-05", contato: "marcio@mail.com", tipo: "residente" },
-            { nome: "Tatiane Almeida", data_nascimento: "1987-02-16", contato: "tatiane@mail.com", tipo: "funcionario" },
-            { nome: "Diego Costa", data_nascimento: "1994-04-23", contato: "diego@mail.com", tipo: "voluntario" },
-            { nome: "Bruna Souza", data_nascimento: "1990-08-10", contato: "bruna@mail.com", tipo: "residente" },
-            { nome: "Luan Ferreira", data_nascimento: "1996-12-31", contato: "luan@mail.com", tipo: "funcionario" },
-            { nome: "Gisele Rodrigues", data_nascimento: "1989-01-05", contato: "gisele@mail.com", tipo: "voluntario" },
         ];
 
         // Carregar a lista de usuários
@@ -214,3 +184,97 @@
         // Inicializa a lista de usuários
         carregarUsuarios();
     });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const residentes = [
+            { nome: "João Silva", dataNascimento: "1940-02-15" },
+            { nome: "Maria Oliveira", dataNascimento: "1938-06-20" }
+            // Adicione mais residentes aqui
+        ];
+    
+        const atividades = [
+            {
+                residente: "João Silva",
+                descricao: "Consulta médica de rotina",
+                data: "2024-10-20", // Compromisso de hoje
+                hora: "10:00",
+                tipo: "medico"
+            }
+        ];
+    
+        const listaResidentes = document.getElementById('listaResidentes');
+        const filtroNomeResidente = document.getElementById('filtroNomeResidente');
+        const filtroAtividadeTipo = document.getElementById('filtroAtividadeTipo');
+        const modalAtividade = document.getElementById('modalAtividade');
+        const formAtividade = document.getElementById('formAtividade');
+        const listaAlertas = document.getElementById('listaAlertas');
+        const closeModalButton = document.querySelector('.modal .close'); // Corrigido o seletor
+    
+        // Função para renderizar lista de residentes
+        const renderResidentes = () => {
+            listaResidentes.innerHTML = '<h3>Residentes</h3>';
+            residentes.forEach((residente, index) => {
+                const residenteDiv = document.createElement('div');
+                residenteDiv.classList.add('residente');
+                residenteDiv.innerHTML = `<p class="nomeResidente">${residente.nome}</p>`;
+                residenteDiv.addEventListener('click', () => openModalAtividade(residente));
+                listaResidentes.appendChild(residenteDiv);
+            });
+        };
+    
+        // Função para abrir modal de atividade
+        const openModalAtividade = (residente) => {
+            document.getElementById('nomeResidenteModal').textContent = residente.nome;
+            modalAtividade.style.display = "block";
+        };
+    
+        // Fechar modal ao clicar no botão "X"
+        closeModalButton.addEventListener('click', () => {
+            modalAtividade.style.display = "none";
+        });
+    
+        // Fechar modal ao clicar fora do conteúdo do modal
+        window.addEventListener('click', (event) => {
+            if (event.target == modalAtividade) {
+                modalAtividade.style.display = "none";
+            }
+        });
+    
+        // Registrar atividade
+        formAtividade.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const atividade = {
+                residente: document.getElementById('nomeResidenteModal').textContent,
+                descricao: formAtividade.descricao.value,
+                data: formAtividade.dataAtividade.value,
+                hora: formAtividade.horaAtividade.value,
+                tipo: formAtividade.tipoAtividade.value
+            };
+            atividades.push(atividade);
+            formAtividade.reset();
+            modalAtividade.style.display = "none";
+            renderAlertas();
+        });
+    
+        // Filtrar residentes
+        filtroNomeResidente.addEventListener('input', () => {
+            renderResidentes();
+        });
+    
+        // Renderizar alertas
+        const renderAlertas = () => {
+            listaAlertas.innerHTML = '';
+            const hoje = new Date().toISOString().split('T')[0]; // Data de hoje
+            atividades.forEach(atividade => {
+                if (atividade.data === hoje) {
+                    const alerta = document.createElement('li');
+                    alerta.textContent = `${atividade.residente}: ${atividade.descricao} às ${atividade.hora}`;
+                    listaAlertas.appendChild(alerta);
+                }
+            });
+        };
+    
+        renderResidentes(); // Renderizar residentes na inicialização
+        renderAlertas(); // Renderizar alertas na inicialização
+    });
+    

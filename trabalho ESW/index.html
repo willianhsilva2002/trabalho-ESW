@@ -14,20 +14,19 @@
                 <ul>
                     <li><a href="#cadastro">Cadastro de Usuários</a></li>
                     <li><a href="#perfis">Gestão de Perfis</a></li>
-                    <li><a href="#historico">Histórico e Atividades</a></li>
+                    <li><a href="#atividades">Histórico e Atividades</a></li>
                     <li><a href="#alertas">Alertas e Notificações</a></li>
-                    <li><a href="#relatorios">Relatórios e Análises</a></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="content">
-            <section id="cadastro">
+            <section id="cadastro" class="cadastro-usuarios">
                 <h2>Cadastro de Usuários</h2>
                 <p>Cadastre novos residentes, funcionários e voluntários.</p>
                 <form id="cadastroForm">
-                    <div class="card">
-                        <h3>Cadastro de Usuários</h3>
+                    <div class="forms">
+                        <h3>Formulário de Cadastro</h3>
                         <label for="nome">Nome:</label>
                         <input type="text" id="nome" name="nome" required>
                         <label for="data_nascimento">Data de Nascimento:</label>
@@ -47,7 +46,7 @@
                 </form>
             </section>
 
-            <section id="perfis">
+            <section id="perfis" class="gestao-perfis">
                 <h2>Gestão de Perfis</h2>
                 <p>Visualize e edite perfis de usuários.</p>
 
@@ -92,50 +91,70 @@
                                 <option value="voluntario">Voluntário</option>
                             </select>
                             <button id="salvarEdicao">Salvar</button>
-                            <button id="excluirUsuario" style="background-color: red; color: white;">Excluir Usuário</button>
+                            <button id="excluirUsuario" >Excluir Usuário</button>
                         </div>
                     </div>
                 </div>
             </section>
-
-            <section id="historico">
-                <h2>Histórico e Atividades</h2>
-                <p>Registre atividades de residentes, funcionários e voluntários.</p>
-                <div class="card">
-                    <h3>Histórico de Residentes</h3>
-                    <button>Ver Histórico</button>
+            
+            <section id="atividades">
+                <h2>Atividades</h2>
+                <p>Registre atividades e compromissos médicos dos Residentes</p>
+                
+                <div class="filtros">
+                    <input type="text" id="filtroNomeResidente" placeholder="Filtrar por nome">
+                    <select id="filtroAtividadeTipo">
+                        <option value="">Todos os Tipos</option>
+                        <option value="medico">Compromisso Médico</option>
+                        <option value="atividade">Atividade</option>
+                    </select>
                 </div>
-                <div class="card">
-                    <h3>Histórico de Funcionários e Voluntários</h3>
-                    <button>Ver Histórico</button>
+                
+                <div id="listaResidentes" class="resident-card">
+                    <h3>Residentes</h3>
+                    <!-- Lista de Residentes gerada dinamicamente -->
+                </div>
+            
+                <!-- Modal para adicionar compromissos médicos/atividades -->
+                <div id="modalAtividade" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h4>Adicionar Registro para <span id="nomeResidenteModal"></span></h4>
+                        <form id="formAtividade">
+                            <label for="descricao">Descrição da Atividade/Compromisso:</label>
+                            <textarea id="descricao" name="descricao" required></textarea>
+            
+                            <label for="dataAtividade">Data:</label>
+                            <input type="date" id="dataAtividade" name="dataAtividade" required>
+            
+                            <label for="horaAtividade">Horário:</label>
+                            <input type="time" id="horaAtividade" name="horaAtividade" required>
+            
+                            <label for="tipoAtividade">Tipo:</label>
+                            <select id="tipoAtividade" name="tipoAtividade">
+                                <option value="medico">Compromisso Médico</option>
+                                <option value="atividade">Atividade</option>
+                            </select>
+                            <button type="submit">Salvar</button>
+                        </form>
+                    </div>
                 </div>
             </section>
-
+            
             <section id="alertas">
                 <h2>Alertas e Notificações</h2>
-                <p>Receba notificações sobre compromissos e atualizações de perfis.</p>
-                <div class="card">
-                    <h3>Compromissos Médicos</h3>
-                    <button>Ver Alertas</button>
-                </div>
-                <div class="card">
-                    <h3>Atualizações de Perfis</h3>
-                    <button>Ver Alertas</button>
+                <p>Receba notificações sobre compromissos e atividades dos Residentes.</p>
+                
+                <div class="activity-card">
+                    <h3>Compromissos e Atividades do Dia</h3>
+                    <ul id="listaAlertas">
+                        <!-- Alertas gerados dinamicamente -->
+                    </ul>
                 </div>
             </section>
+            
 
-            <section id="relatorios">
-                <h2>Relatórios e Análises</h2>
-                <p>Gere relatórios e visualize gráficos sobre atividades e desempenho.</p>
-                <div class="card">
-                    <h3>Relatórios de Residentes</h3>
-                    <button>Gerar Relatório</button>
-                </div>
-                <div class="card">
-                    <h3>Relatórios de Funcionários e Voluntários</h3>
-                    <button>Gerar Relatório</button>
-                </div>
-            </section>
+
         </main>
     </div>
     <script src="js/index.js" defer></script>
